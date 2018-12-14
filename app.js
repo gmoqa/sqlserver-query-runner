@@ -9,19 +9,23 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
-const config = {
-    user: 'sa',
-    password: '####plfrg',
-    server: 'localhost',
-    database: 'MPCatchSB'
+const connection = async () => {
+    const config = {
+        user: 'sa',
+        password: '####plfrg',
+        server: 'localhost',
+        database: 'MPCatchSB'
+    }
+    return await sql.connect(config)
 }
+
+const pool = connection();
 
 app.get('/status', (req, res) => {
     res.send('Ok :)')
 })
 
 app.post('/sql', asyncHandler(async (req, res, next) => {
-    let pool = await sql.connect(config)
     const result = await pool.request()
         .query(`${req.body.query}`);
     console.dir(result)
