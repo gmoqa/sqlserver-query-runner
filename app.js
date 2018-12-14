@@ -22,10 +22,10 @@ app.get('/status', (req, res) => {
 })
 
 app.post('/sql', asyncHandler(async (req, res, next) => {
-    let pool = sql.connect(config)
+    let pool = await sql.connect(config)
     const result = await pool.request()
         .query(`${req.body.query}`);
-    await sql.close();
+    await pool.close();
     console.dir(result)
     res.send(result)
 }))
