@@ -15,18 +15,16 @@ app.get('/status', (req, res) => {
 })
 
 app.post('/sql', (req, res) => {
-    async () => {
-        try {
-            await sql.connect(conn)
-            const result = await sql.query`select 1+1`
-            console.log(result)
-            res.statusCode(200)
-        } catch (err) {
-            console.log(err)
-        }
+    try {
+        await sql.connect(conn)
+        const result = await sql.query`${req.body.query}`
+        console.log(result)
+        res.send(result)
+    } catch (err) {
+        console.log(err)
     }
 })
 
-app.listen(3000, () => {
+app.listen(3002, () => {
     console.log('Running')
 })
