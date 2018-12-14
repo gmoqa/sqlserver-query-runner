@@ -17,7 +17,7 @@ const config = {
     database: 'MPCatchSB'
 }
 
-const POOL = null;
+let POOL = null;
 
 app.get('/status', (req, res) => {
     res.send('Ok :)')
