@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 
 const config = {
     user: 'sa',
-    passsword: '####plfrg',
+    password: '####plfrg',
     server: 'localhost',
     database: 'MPCatchSB'
 }
