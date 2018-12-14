@@ -23,10 +23,10 @@ app.get('/status', (req, res) => {
     res.send('Ok :)')
 })
 
-app.get('/connect', (req, res) => {
+app.get('/connect', asyncHandler(async (req, res) => {
     POOL = await sql.connect(config)
     res.send('Ok :)')
-})
+}))
 
 app.post('/sql', asyncHandler(async (req, res, next) => {
     const result = await POOL.request()
