@@ -14,7 +14,7 @@ app.get('/status', (req, res) => {
     res.send('Ok :)')
 })
 
-app.post('/sql', (req, res) => {
+app.post('/sql', async (req, res) => {
     try {
         await sql.connect(conn)
         const result = await sql.query`${req.body.query}`
