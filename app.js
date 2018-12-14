@@ -17,15 +17,20 @@ const config = {
     database: 'MPCatchSB'
 }
 
+const POOL = null;
+
 app.get('/status', (req, res) => {
     res.send('Ok :)')
 })
 
+app.get('/connect', (req, res) => {
+    POOL = await sql.connect(config)
+    res.send('Ok :)')
+})
+
 app.post('/sql', asyncHandler(async (req, res, next) => {
-    let pool = await sql.connect(config)
-    const result = await pool.request()
+    const result = await POOL.request()
         .query(`${req.body.query}`);
-    await pool.close();
     console.dir(result)
     res.send(result)
 }))
